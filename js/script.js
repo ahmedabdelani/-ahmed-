@@ -493,7 +493,7 @@ document.getElementById("submitOrderFinalBtn").addEventListener("click", () => {
   document.getElementById("generatedTrackCode").textContent = trackCode;
   
   // Format clean programmatic text for WhatsApp API integration routing fallback securely
-  let waText = `مرحباً دار سينتارا، وددت تأكيد طلبي عبر الكود (${trackCode}).\nالاسم: ${name}\nالإجمالي: ${totalAmount} جنيه.`;
+  let waText = `مرحباً العباسي ستور، وددت تأكيد طلبي عبر الكود (${trackCode}).\nالاسم: ${name}\nالإجمالي: ${totalAmount} جنيه.`;
   document.getElementById("successWaLink").href = `https://wa.me/201113053074?text=${encodeURIComponent(waText)}`;
 
   closeAllModals();
@@ -638,7 +638,7 @@ document.getElementById("policy-btn-return").addEventListener("click", (e) => {
 document.getElementById("policy-btn-privacy").addEventListener("click", (e) => {
   e.preventDefault();
   document.getElementById("policyTitle").textContent = "شروط الخصوصية وضوابط الأمان الفني";
-  document.getElementById("policyBody").innerHTML = `في دار سينتارا، نحتفظ بصيغ التركيبات المخصصة للعملاء برقم هاتفهم في قاعدة البيانات لضمان قدرتهم على إعادة طلب نفس الصيغة الحصرية مستقبلاً دون تغيير في النوتات. لا يتم مشاركة بيانات العنوان أو أرقام التواصل مع أي أطراف ثالثة خارج النطاق التنفيذي لشركات الشحن المعتمدة لدينا لتأمين تسليم طلبك.`;
+  document.getElementById("policyBody").innerHTML = `في العباسي ستور ، نحتفظ بصيغ التركيبات المخصصة للعملاء برقم هاتفهم في قاعدة البيانات لضمان قدرتهم على إعادة طلب نفس الصيغة الحصرية مستقبلاً دون تغيير في النوتات. لا يتم مشاركة بيانات العنوان أو أرقام التواصل مع أي أطراف ثالثة خارج النطاق التنفيذي لشركات الشحن المعتمدة لدينا لتأمين تسليم طلبك.`;
   openModal("policyModal");
 });
 
