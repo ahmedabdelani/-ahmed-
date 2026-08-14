@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>العباسي — عطور فاخرة مخصصة وجاهزة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-right">
+    <button class="btn-icon-nav" id="cart-btn">
+      🛒 السلة <span id="cart-count">0</span>
+    </button>
+    <button class="btn-icon-nav" id="admin-panel-btn" style="border-color: rgba(201,168,76,0.4);">
+      🔑 الإدارة
+    </button>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#ready">المجموعة الجاهزة</a></li>
+    <li><a href="#custom">أتيليه التصميم الحر</a></li>
+    <li><a href="#about">قصتنا</a></li>
+    <li><a href="#faq">الأسئلة الشائعة</a></li>
+  </ul>
+  <a class="nav-logo" href="#">Eng Ahmed</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <canvas class="hero-canvas" id="particleCanvas"></canvas>
+  <div class="hero-content">
+    <p class="hero-eyebrow">     عطور فاخره . صنعت بشغف</p>
+    <h1> فن العطر  <br><em> يصنع من اجلك </em></h1>
+    <p class="hero-sub">
+      
+اكتشف مجموعتنا المختارة من العطور الجاهزة، أو صمّم مزيجك الخاص من أفخم المكونات العطرية.    </p>
+    <div class="hero-btns">
+      <a href="#ready" class="btn-gold">اكتشف المجموعة الجاهزة</a>
+      <a href="#custom" class="btn-outline">ابدأ التصميم المعملي</a>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- READY MADE SECTION -->
+<section id="ready">
+  <p class="section-eyebrow">المكتبة العطرية</p>
+  <h2 class="section-title">مجموعة العطور الجاهزة</h2>
+  <p class="section-desc">تحف فنية مصاغة بأيدي خبراء العطور، تصفح، فلتر وابحث عن النوتة اللائقة بذوقك الفريد.</p>
+
+  <div class="catalog-controls">
+    <input type="text" class="search-input" id="searchBar" placeholder="ابحث عن اسم عطر أو نوتة معينة (مثال: عود، ياسمين)..." />
+    <select class="filter-select" id="familyFilter">
+      <option value="all">كل العائلات العطرية</option>
+      <option value="شرقي">شرقي عتيق</option>
+      <option value="زهري">زهري حسي</option>
+      <option value="خشبي">خشب مدخن</option>
+      <option value="منعش حمضي">حمضيات منعشة</option>
+    </select>
+    <select class="filter-select" id="sortFilter">
+      <option value="default">الترتيب الافتراضي</option>
+      <option value="price-asc">السعر: من الأقل للأعلى</option>
+      <option value="price-desc">السعر: من الأعلى للأقل</option>
+    </select>
+  </div>
+
+  <div class="perfume-grid" id="perfumeGrid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CUSTOM BLEND SECTION -->
+<section id="custom">
+  <p class="section-eyebrow">المعمل الرقمي الخاص بك</p>
+  <h2 class="section-title">صمم زجاجتك الحصرية الآن</h2>
+  <p class="section-desc">اختر الزيوت العطرية النقية وتفاعل مع النسب بدقة. يقوم النظام باحتساب التكلفة الفعلية لكل مليجرام ديناميكياً بناءً على ندرة المكون.</p>
+
+  <div class="mixer-layout">
+    <!-- Left: Ingredients DB Selection -->
+    <div class="ingredients-container">
+      <h3 style="font-family:'Amiri', serif; margin-bottom:16px; color:var(--gold);">1. اختر المكونات الفاخرة</h3>
+      <div class="ingredients-grid" id="ingredientsGrid"></div>
+    </div>
+
+    <!-- Right: Formulation Logic -->
+    <div>
+      <h3 style="font-family:'Amiri', serif; margin-bottom: 16px; color:var(--gold);">2. لوحة موازنة المزيج</h3>
+      
+      <div class="ratio-bar-wrapper">
+        <div class="ratio-header">
+          <span>حالة دمج الزيوت والنوتات:</span>
+          <span id="ratioPercentage">0% / 100%</span>
+        </div>
+        <div class="ratio-bar-container" id="ratioBarContainer"></div>
+        <div class="ratio-status-text" id="ratioStatusText" style="color:var(--danger);">المزيج فارغ. يرجى اختيار المكونات للوصول إلى 100%.</div>
+      </div>
+
+      <div class="selected-ingredients" id="selectedIngredients">
+        <p class="mix-placeholder">انقر على الخامات المتواجدة بالقائمة اليمنى لتوليف صيغتك الكيميائية الخاصة.</p>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 24px;">
+        <label>3. حجم عبوة الكريستال</label>
+        <div style="display:flex; gap:10px; margin-top:6px;">
+          <select id="customSizeSelect" class="filter-select" style="width:100%; height:46px;">
+            <option value="30">30 مل (حجم شخصي للمواظبة)</option>
+            <option value="50" selected>50 مل (المعيار الاحترافي)</option>
+            <option value="80">80 مل (نسخة السفر والاقتناء الممتد)</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="background:rgba(0,0,0,0.2); padding:20px; border-radius:var(--r); border:1px solid var(--border); margin-bottom:24px; display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <p style="font-size:0.8rem; color:var(--muted);">التكلفة التقديرية التراكمية:</p>
+          <p id="customPriceDisplay" style="font-family:'Amiri', serif; font-size:2.2rem; font-weight:700; color:var(--gold);">0 جنيه</p>
+        </div>
+        <button class="btn-gold" id="addCustomToCartBtn" disabled style="padding:16px 32px;">اعتماد المزيج وإضافته للسلة</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS TRUST SECTIONS -->
+<div class="divider"></div>
+<section id="about" style="text-align:center; max-width:800px;">
+  <p class="section-eyebrow">من نحن</p>
+  <h2 class="section-title">دار سينتارا للنيش والعطور المصممة</h2>
+  <p style="color:var(--muted); font-size:1rem; line-height:2;">بدأنا من شغف جمع المكونات النادرة من جبال الأطلس وغابات كمبوديا وحقول غراس الفرنسية. نحن لا نبيع زجاجات تجارية مكررة، بل نمنح عميلنا سلطة هندسة رائحته الخاصة بإشراف معامل كيميائية متمكنة تضمن ثباتاً وعمقاً فريداً لكل رشة.</p>
+</section>
+
+<div class="divider"></div>
+<section id="faq">
+  <p class="section-eyebrow">المساعدة والدعم</p>
+  <h2 class="section-title">الأسئلة الشائعة</h2>
+  <div class="faq-item">
+    <button class="faq-trigger">كيف تضمنون ثبات العطور المصممة ذاتياً؟ <span>+</span></button>
+    <div class="faq-content">نستخدم مذيبات ومثبتات فرنسية فاخرة (Eau de Parfum بتركيز يتخطى 25%)، وتتم مراجعة المزيج لمنع أي تطاير سريع.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-trigger">كم يستغرق شحن العطر المخصص؟ <span>+</span></button>
+    <div class="faq-content">يستغرق الدمج والتعتيق المبدئي الفوري من 24 إلى 48 ساعة، ثم يتم تسليمه لشركة الشحن لتصلك الشحنة خلال 3 أيام عمل.</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <h4>سينتارا</h4>
+    <p>صياغة معملية فاخرة تحتفظ بالخصوصية المطلقة لذوقك.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#" id="policy-btn-return">سياسة الاسترجاع</a>
+    <a href="#" id="policy-btn-privacy">سياسة الخصوصية والشروط</a>
+  </div>
+  <div>© 2026 دار سينتارا للعطور الفاخرة. جميع الحقوق محفوظة.</div>
+</footer>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <button class="cart-close" id="cartClose">✕</button>
+    <h2>سلة التسوق الحالية</h2>
+  </div>
+  <div class="cart-items" id="cartItemsContainer"></div>
+  <div class="cart-footer" id="cartFooterElement">
+    <div class="cart-total-row">
+      <span>الإجمالي النهائي:</span>
+      <span id="cartTotalAmount">0 جنيه</span>
+    </div>
+    <button class="btn-gold" id="goToCheckoutBtn" style="width:100%; padding:14px;">الانتقال لملء تفاصيل التوصيل</button>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL / REVIEW MODAL -->
+<div class="modal-overlay" id="productDetailModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <div class="p-detail-grid">
+      <div class="p-detail-img">
+        <img id="detailModalImg" src="" alt="Perfume Image" />
+      </div>
+      <div>
+        <span class="perfume-badge" id="detailModalFamily"></span>
+        <h2 font-family="Amiri" id="detailModalName" style="margin-bottom:8px;"></h2>
+        
+        <div class="tabs-nav">
+          <button class="tab-btn active" onclick="switchTab('tab-story')">القصة والنوتات</button>
+          <button class="tab-btn" onclick="switchTab('tab-reviews')">تقييمات مجتمعنا</button>
+        </div>
+
+        <div id="tab-story" class="tab-content active">
+          <p id="detailModalDesc" style="font-size:0.9rem; color:var(--muted); margin-bottom:16px;"></p>
+          <p style="font-size:0.85rem; font-weight:500; color:var(--gold);">الهرم العطري الكامل:</p>
+          <p id="detailModalNotes" style="font-size:0.82rem; color:var(--cream);"></p>
+        </div>
+
+        <div id="tab-reviews" class="tab-content">
+          <div class="reviews-list" id="detailModalReviewsList"></div>
+        </div>
+
+        <div style="margin-top:24px; padding-top:16px; border-top:1px solid var(--border);">
+          <label style="font-size:0.8rem; color:var(--muted);">اختر الحجم المراد اقتناؤه:</label>
+          <div style="display:flex; gap:10px; margin-top:8px;" id="detailSizeSelectors"></div>
+          <button class="btn-gold" id="detailModalAddToCartBtn" style="width:100%; margin-top:16px;">تأكيد الحجم وإضافة للسلة</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal" style="max-width:550px; padding:30px;">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h2 font-family="Amiri" style="margin-bottom:20px; color:var(--gold);">استمارة تأكيد وتتبع الطلب</h2>
+    <div style="background:rgba(0,0,0,0.2); padding:14px; border-radius:6px; margin-bottom:16px; font-size:0.85rem;" id="checkoutSummary"></div>
+    
+    <div class="form-grid">
+      <div class="form-group full">
+        <label>الاسم الكامل المستلم <span>*</span></label>
+        <input type="text" id="custName" placeholder="مثال: أمجد عبد الرحمن الهاشمي" required />
+      </div>
+      <div class="form-group">
+        <label>رقم الاتصال الفوري (واتساب) <span>*</span></label>
+        <input type="tel" id="custPhone" placeholder="01xxxxxxxxx" required />
+      </div>
+      <div class="form-group">
+        <label>المحافظة / المدينة <span>*</span></label>
+        <input type="text" id="custCity" placeholder="مثال: القاهرة، الإسكندرية" required />
+      </div>
+      <div class="form-group full">
+        <label>العنوان التفصيلي بالتفصيل <span>*</span></label>
+        <input type="text" id="custAddress" placeholder="اسم الشارع، رقم البناء، الطابق" required />
+      </div>
+    </div>
+    <button class="btn-gold" id="submitOrderFinalBtn" style="width:100%; margin-top:16px; padding:14px;">إرسال الطلب النهائي للمطابقة والتحضير</button>
+  </div>
+</div>
+
+<!-- ORDER TRACKING & SUCCESS MODAL -->
+<div class="modal-overlay" id="successTrackingModal">
+  <div class="modal" style="max-width:500px; padding:40px; text-align:center;">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <div style="font-size:3.5rem; color:var(--gold); margin-bottom:16px;">✨</div>
+    <h2 font-family="Amiri" style="color:var(--gold); margin-bottom:12px;">تم قيد طلبك بنجاح حصرى!</h2>
+    <p style="font-size:0.9rem; color:var(--muted); margin-bottom:20px;">لقد تم حفظ تفاصيل المعاملة بنجاح، وتوليد كود التتبع الفوري الخاص بك لمراجعته في لوحة التحكم أو مع خدمة العملاء:</p>
+    <div style="background:var(--panel); border:1px dashed var(--gold); padding:12px; font-size:1.1rem; font-weight:700; color:var(--cream); letter-spacing:1px; margin-bottom:24px;" id="generatedTrackCode"></div>
+    <a href="#" id="successWaLink" target="_blank" class="btn-gold" style="background:#25D366; color:#fff; width:100%;">الانتقال الفوري لتأكيد الشحن عبر واتساب</a>
+  </div>
+</div>
+
+<!-- POLICY MODAL -->
+<div class="modal-overlay" id="policyModal">
+  <div class="modal" style="max-width:550px; padding:30px;">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <h2 font-family="Amiri" id="policyTitle" style="color:var(--gold); margin-bottom:16px;"></h2>
+    <div id="policyBody" style="font-size:0.9rem; color:var(--muted); line-height:1.9; max-height:400px; overflow-y:auto;"></div>
+  </div>
+</div>
+
+<!-- BACKOFFICE / ADMIN DASHBOARD MODAL -->
+<div class="modal-overlay" id="adminDashboardModal">
+  <div class="modal" style="max-width:950px;">
+    <button class="modal-close" onclick="closeAllModals()">✕</button>
+    <div class="admin-layout">
+      <div class="admin-sidebar">
+        <h3 style="font-family:'Amiri',serif; color:var(--gold); margin-bottom:14px;">لوحة المشرف</h3>
+        <button class="admin-nav-btn active" onclick="switchAdminTab('admin-orders', this)">الطلبات والتتبع</button>
+        <button class="admin-nav-btn" onclick="switchAdminTab('admin-products', this)">كتالوج المنتجات</button>
+      </div>
+      <div class="admin-main">
+        <!-- Tab 1: Orders -->
+        <div id="admin-orders" class="admin-tab-content" style="display:block;">
+          <h3>الطلبات المودعة بالنظام</h3>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>رقم التتبع</th>
+                <th>العميل</th>
+                <th>البيان المالي</th>
+                <th>حالة التوصيل</th>
+                <th>التحكم</th>
+              </tr>
+            </thead>
+            <tbody id="adminOrdersTableBody"></tbody>
+          </table>
+        </div>
+        <!-- Tab 2: Products -->
+        <div id="admin-products" class="admin-tab-content" style="display:none;">
+          <div style="display:flex; justify-content:between; align-items:center; margin-bottom:14px;">
+            <h3>التحكم الفوري بالمعروضات</h3>
+            <button class="btn-gold" style="padding:6px 12px; font-size:0.8rem;" onclick="openAddProductForm()">+ إضافة عطر جديد</button>
+          </div>
+          <div id="addProductFormBlock" style="display:none; background:rgba(0,0,0,0.2); padding:16px; border-radius:8px; margin-bottom:20px; border:1px solid var(--border);">
+            <div class="form-grid">
+              <div class="form-group"><label>اسم العطر</label><input type="text" id="admPName" /></div>
+              <div class="form-group"><label>العائلة العطرية</label><input type="text" id="admPFamily" /></div>
+              <div class="form-group full"><label>النوتات والمكونات الأساسية</label><input type="text" id="admPNotes" /></div>
+              <div class="form-group full"><label>وصف قصة العطر</label><textarea id="admPDesc" rows="2"></textarea></div>
+              <div class="form-group"><label>رابط الصورة البديلة</label><input type="text" id="admPImg" placeholder="https://unsplash.com/..." /></div>
+              <div class="form-group"><label>سعر الـ 30 مل الأساسي</label><input type="number" id="admPPrice" value="300" /></div>
+            </div>
+            <button class="btn-gold" style="margin-top:10px;" onclick="saveNewProductAdmin()">حفظ وإدراج في قاعدة البيانات</button>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>العطر</th>
+                <th>العائلة العطرية</th>
+                <th>السعر الأساسي</th>
+                <th>التحكم بالمعروض</th>
+              </tr>
+            </thead>
+            <tbody id="adminProductsTableBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST NOTIFICATION -->
+<div class="toast" id="toastElement"></div>
+
+<!-- WA FLOAT -->
+<div class="wa-float">
+  <a href="https://wa.me/201113053074" target="_blank" class="wa-btn" title="تواصل مباشر">💬</a>
+</div>
+
+</body>
+</html>
