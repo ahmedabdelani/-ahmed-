@@ -26,6 +26,7 @@
       direction: rtl;
     }
 
+
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--ink); }
     ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
